@@ -1,0 +1,12 @@
+{
+	template: "scorm.template",
+	globs: ["learning_objects/**/*.*","{css,extend,fonts,images,img,javascripts,unique,vocab}/**/*.*","*.{xsd,xml,png,swf,config,dtd}"],
+	props: {
+		manifest_id:'com.sfc.ica',
+		org_id: 'sfc',
+		sco_id: 'ID872abf41-c2f9-4100-85cc-3c50682dbfaf,
+		org_name: 'ICareAmbassador',
+		sco_name: 'Module One',
+		sco_pass_score: 0.7
+	}
+}

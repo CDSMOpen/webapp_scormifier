@@ -1,0 +1,11 @@
+{
+  "name": "webapp_scormifier",
+  "version": "0.1.0",
+  "description": "Project template to package web folders as simple scos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ddubyah",
+  "license": "BSD-2-Clause"
+}

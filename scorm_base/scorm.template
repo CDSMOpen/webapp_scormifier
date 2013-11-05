@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" standalone="no" ?>
+<manifest identifier="{{props.manifest_id}}" version="1.0" xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 imscp_v1p1.xsd http://www.imsglobal.org/xsd/imsss imsss_v1p0.xsd http://www.adlnet.org/xsd/adlcp_v1p3 adlcp_v1p3.xsd http://www.adlnet.org/xsd/adlseq_v1p3 adlseq_v1p3.xsd http://www.adlnet.org/xsd/adlnav_v1p3 adlnav_v1p3.xsd" xmlns="http://www.imsglobal.org/xsd/imscp_v1p1" xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_v1p3" xmlns:adlseq="http://www.adlnet.org/xsd/adlseq_v1p3" xmlns:adlnav="http://www.adlnet.org/xsd/adlnav_v1p3" xmlns:imsss="http://www.imsglobal.org/xsd/imsss" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>2004 3rd Edition</schemaversion>
+  </metadata>
+  <organizations default="{{props.org_id}}">
+    <organization identifier="{{props.org_id}}">
+      <title>{{props.org_name}}</title>
+      <item identifier="{{props.sco_id}}" identifierref="sco_{{props.sco_id}}">
+        <title>{{props.sco_name}}</title>
+        <imsss:sequencing>
+			<imsss:objectives>
+				<imsss:primaryObjective objectiveID="PRIMOBJ" satisfiedByMeasure="true">
+					<imsss:minNormalizedMeasure>{{props.sco_pass_score}}</imsss:minNormalizedMeasure>
+				</imsss:primaryObjective>
+			</imsss:objectives>
+			<imsss:deliveryControls completionSetByContent="true" objectiveSetByContent="true" />
+		</imsss:sequencing>
+      </item>
+	  <imsss:sequencing>
+		  <imsss:controlMode choiceExit="true" flow="true" />
+	  </imsss:sequencing>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="sco_{{props.sco_id}}" adlcp:scormType="sco" href="index.html" type="webcontent">
+		<file href="index.html"/>
+		{{#group1.files}}
+		<file href="{{.}}"/>
+		{{/group1.files}}
+		{{#group2.files}}
+		<file href="{{.}}"/>
+		{{/group2.files}}
+		{{#group3.files}}
+		<file href="{{.}}"/>
+		{{/group3.files}}
+    </resource>
+  </resources>
+</manifest>
