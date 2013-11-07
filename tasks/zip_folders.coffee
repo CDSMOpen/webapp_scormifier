@@ -19,6 +19,9 @@ module.exports = (grunt)->
 
 		console.log target.options for target in targets
 
-		# for target in targets
-		# 	grunt.config ["zip", target.name], target.options
-		# 
+		zipTasks = for target in targets
+			grunt.config ["zip", target.name], target.options
+			"zip:#{target.name}"
+
+		grunt.task.run zipTasks
+		

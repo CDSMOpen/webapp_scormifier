@@ -3,17 +3,13 @@ path = require 'path'
 module.exports = (grunt)->
 	require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks)
 
-	inputFolder = "content"
-	tempFolder = ".tmp"
+	inputFolder = "input"
+	tempFolder = "working"
 	outputFolder = "output"
 
-	packageConfig = 
-		dest: "output"
-		input: "content"
+
 
 	grunt.initConfig
-		conf: packageConfig
-
 		clean:
 			output: outputFolder
 			temp: tempFolder
@@ -28,7 +24,7 @@ module.exports = (grunt)->
 				files: [
 					expand: true
 					cwd: inputFolder
-					src: ["*/C[1,2,3,4,6]*/**/*.*"]
+					src: ["*/*/**/*.*"]
 					dest: tempFolder
 				]
 
@@ -55,9 +51,9 @@ module.exports = (grunt)->
 		writeIMSManifests:
 			scorms:
 				options:
-					template: grunt.file.read "templates/imsmanifest.xml.handlebars"
+					template: grunt.file.read "templates/imsmanifest_noscore.xml.handlebars"
 					projectName: "Santia"
-					folders: [".tmp/*/*"]
+					folders: ["#{tempFolder}/*/*"]
 					props:
 						manifest_id: "uk.co.santia" # unique namespace to this pack - com.cdsm.customer.project.module
 						org_id: "org_id_santia" # unique to this pack. This is not the Customer Org. It's how to organise scos
@@ -132,6 +128,13 @@ module.exports = (grunt)->
 		grunt.task.run manifestTasks
 
 
+	###*
+	 * Run These Tasks!!!!
+	 * e.g. `grunt scormify package` to both scormify and zip the scos up
+	 * or run them separately 
+	 * e.g `grunt scormify` to just create the scos in the temp folder 
+	###
+
 	grunt.loadTasks "tasks"
-	grunt.registerTask "test", ["clean:test", "multiDestCopy:test"]
-	grunt.registerTask "default", ["clean:temp", "copy:content", "multiDestCopy:scormFiles", "writeIMSManifests"]
+	grunt.registerTask "scormify", ["clean:temp", "copy:content", "multiDestCopy:scormFiles", "writeIMSManifests"]
+	grunt.registerTask "package", ["clean:output", "zipFolders"]
