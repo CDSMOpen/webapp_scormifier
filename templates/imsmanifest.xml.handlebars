@@ -4,10 +4,10 @@
     <schema>ADL SCORM</schema>
     <schemaversion>2004 3rd Edition</schemaversion>
   </metadata>
-  <organizations default="{{props.org_id}}">
-    <organization identifier="{{props.org_id}}">
+  <organizations default="{{hash props.org_id}}">
+    <organization identifier="{{hash props.org_id}}">
       <title>{{props.org_name}}</title>
-      <item identifier="{{props.sco_id}}" identifierref="sco_{{props.sco_id}}">
+      <item identifier="{{hash props.sco_id}}" identifierref="sco_{{hash props.sco_id}}">
         <title>{{props.sco_name}}</title>
         <imsss:sequencing>
 			<imsss:objectives>
@@ -24,17 +24,11 @@
     </organization>
   </organizations>
   <resources>
-    <resource identifier="sco_{{props.sco_id}}" adlcp:scormType="sco" href="index.html" type="webcontent">
-		<file href="index.html"/>
-		{{#group1.files}}
+    <resource identifier="sco_{{hash props.sco_id}}" adlcp:scormType="sco" href="index_scorm.html" type="webcontent">
+		{{!-- <file href="index_scorm.html"/> --}}
+		{{#files}}
 		<file href="{{safeUri .}}"/>
-		{{/group1.files}}
-		{{#group2.files}}
-		<file href="{{.}}"/>
-		{{/group2.files}}
-		{{#group3.files}}
-		<file href="{{.}}"/>
-		{{/group3.files}}
+		{{/files}}
     </resource>
   </resources>
 </manifest>
