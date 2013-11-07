@@ -29,16 +29,6 @@ module.exports = (grunt)->
 				]
 
 		multiDestCopy:
-			test:
-				options:
-					dests: ["test/*/*"]
-
-				files: [	
-					expand: true
-					cwd: inputFolder
-					src: ["*/C1*/**/*.*"]
-				]
-
 			scormFiles:
 				options:
 					dests: ["#{tempFolder}/*/*"]
